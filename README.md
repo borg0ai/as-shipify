@@ -6,6 +6,10 @@
 
 Shipify guides repository releases: synchronize version files, commit, tag, push, publish GitHub Release assets for CLI and app builds on supported macOS, Linux, and Windows targets, then update `luban-homebrew` (macOS), `cangjie-nix` (Linux), and `shennong-bucket` (Windows) through pull requests.
 
+## Latest release
+
+Shipify 0.1.4 enforces releases from a clean `main` synchronized with `origin/main`. On `main`, it commits and pushes release-related changes after checking that no unrelated work is present. It also requires a README update for every release.
+
 Shipify reads channel checkout paths from `~/.shipify/setting.json`. Relative paths resolve from the repository being released. The file uses this shape:
 
 ```json

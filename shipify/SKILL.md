@@ -3,7 +3,7 @@ name: shipify
 description: Release a repository safely by synchronizing version files, committing, tagging, and pushing; publish GitHub Release assets for CLI and app builds on supported macOS, Linux, and Windows targets, then update channel repositories configured in ~/.shipify/setting.json through pull requests. Use when preparing or executing a software release in an existing repository.
 license: MIT
 metadata:
-  version: "0.1.3"
+  version: "0.1.4"
 ---
 
 # Shipify
