@@ -10,12 +10,21 @@ metadata:
 
 Guide one repository release at a time. Inspect repository evidence first; preserve its established release contract and user changes.
 
+## Release preflight
+
+Run this preflight before reading release configuration or making any release change. Never release from another branch.
+
+1. Require the current branch to be `main`. Stop immediately if it is not; do not switch branches.
+2. Fetch `origin/main`. When the worktree is clean and local `main` is behind, fast-forward with `git pull --ff-only origin main`. Stop if local and remote histories diverged or the fetch or fast-forward fails.
+3. If the worktree is dirty, inspect the full diff. When every change belongs to this requested release and local `HEAD` equals `origin/main`, stage only those release paths, commit with repository conventions, and push to `origin main`. Stop if changes are unrelated or local and remote commits differ. Never stash, discard, stage unrelated changes, or force-push.
+4. Require a clean worktree and `git rev-parse HEAD` equal to `git rev-parse origin/main` before continuing. Stop if either check fails.
+
 ## Release workflow
 
 1. Read `~/.shipify/setting.json` and parse the channel repository paths from `channels.macos.path`, `channels.linux.path`, and `channels.windows.path`. Resolve relative paths from the repository being released. Stop and report if the file is missing, invalid, or lacks a required channel path. Then inspect repository instructions, Git status, current branch, remotes, latest tags/releases, package manifests, release workflows, and documented release commands. Identify product type, canonical version source, and required artifacts.
 2. Stop if unrelated changes, an unexpected branch, missing remote, conflicting tag, or existing release makes the requested release unsafe. Do not discard or stage unrelated user changes.
 3. Select requested version. Update every authoritative version file and every synchronized copy required by repository conventions. Search manifests, lockfiles, app metadata, CLI metadata, and generated version files; do not edit generated files by hand when project tooling owns them. Preserve prerelease/channel semantics.
-4. After the version bump, ask the user whether the repository README should change to reflect this release. Wait for the answer. If approved, update the README before checks, commit, or push. If declined, record that the README was reviewed and left unchanged. Never commit or push before this decision and any approved README update are complete.
+4. After the version bump, update the repository README to state the release version and user-visible changes. This update is mandatory for every release. Complete it before checks, commit, or push; never ask whether to skip it.
 5. Run repository's required version, build, and release checks. Report exact failures and stop before commit when a required check fails.
 6. Review complete diff. Stage only release-related paths. Commit with repository's conventions. Verify clean or understood post-commit status and confirm commit contains intended paths only.
 7. Create annotated tag using repository's tag format, normally `v<version>`. Verify tag points to release commit and does not already exist.
