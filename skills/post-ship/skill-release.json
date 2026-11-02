@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "skillId": "post-ship",
+  "channel": "stable",
+  "version": "0.1.0",
+  "source": {
+    "repository": "https://github.com/borg0ai/as-shipify"
+  },
+  "updateManifestUrl": "https://raw.githubusercontent.com/borg0ai/as-shipify/main/skills/post-ship/skill-release.json"
+}

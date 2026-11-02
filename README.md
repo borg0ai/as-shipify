@@ -8,7 +8,7 @@ Shipify guides repository releases: synchronize version files, commit, tag, push
 
 ## Latest release
 
-Shipify 0.1.4 enforces releases from a clean `main` synchronized with `origin/main`. On `main`, it commits and pushes release-related changes after checking that no unrelated work is present. It also requires a README update for every release.
+Shipify 0.1.4 enforces releases from a clean `main` synchronized with `origin/main`. On `main`, it commits and pushes release-related changes after checking that no unrelated work is present. It also requires a README update for every release, asks the target repository's agent to verify or add a safe pnpm `clean` script, and opens `luban-homebrew` feature branches against `main`. Use the separate `post-ship` skill to return the originating checkout to an up-to-date local `main`.
 
 Shipify reads channel checkout paths from `~/.shipify/setting.json`. Relative paths resolve from the repository being released. The file uses this shape:
 
@@ -25,7 +25,8 @@ Shipify reads channel checkout paths from `~/.shipify/setting.json`. Relative pa
 ## Install
 
 ```bash
-npx skills add borg0ai/shipify --skill shipify --agent '*' --global --yes
+npx skills add borg0ai/as-shipify --skill shipify --agent '*' --global --yes
+npx skills add borg0ai/as-shipify --skill post-ship --agent '*' --global --yes
 ```
 
 ## Validate and discover
@@ -33,19 +34,24 @@ npx skills add borg0ai/shipify --skill shipify --agent '*' --global --yes
 Run from this repository root:
 
 ```bash
-node ../skillify/skillify/scripts/validate-skill.mjs shipify
+node ../skillify/skillify/scripts/validate-skill.mjs skills/shipify
+node ../skillify/skillify/scripts/validate-skill.mjs skills/post-ship
 npx skills add . --list
 ```
 
 ## Layout
 
 ```text
-shipify/
-  SKILL.md
-  skill-release.json
-  LICENSE
-  references/
-    channels.md
+skills/
+  shipify/
+    SKILL.md
+    skill-release.json
+    LICENSE
+    references/channels.md
+  post-ship/
+    SKILL.md
+    skill-release.json
+    LICENSE
 logos/shipify-icon.svg
 logos/shipify-avatar-512.png
 README.md
