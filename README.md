@@ -8,7 +8,7 @@ Shipify guides repository releases: synchronize version files, commit, tag, push
 
 ## Latest release
 
-Shipify 0.1.4 enforces releases from a clean `main` synchronized with `origin/main`. On `main`, it commits and pushes release-related changes after checking that no unrelated work is present. It also requires a README update for every release, asks the target repository's agent to verify or add a safe pnpm `clean` script, and opens `luban-homebrew` feature branches against `main`. Use the separate `post-ship` skill to return the originating checkout to an up-to-date local `main`.
+Shipify 0.1.5 enforces releases from a clean `main` synchronized with `origin/main`. On `main`, it commits and pushes release-related changes after checking that no unrelated work is present. It requires a README update for every release, asks a pnpm target repository's agent to verify or add a safe `clean` script, and opens `luban-homebrew` feature branches against `main`. Use the separate `post-ship` skill to return the originating checkout to an up-to-date local `main`.
 
 Shipify reads channel checkout paths from `~/.shipify/setting.json`. Relative paths resolve from the repository being released. The file uses this shape:
 
